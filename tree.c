@@ -8,7 +8,7 @@ enum tree_type {
 	RB,
 	HEAP,
 	SPLAY
-}
+};
 
 typedef struct _node {
 	struct _node *child[2];
@@ -216,19 +216,5 @@ insert(int value, Node *root) {
 	rebalance(stack);
 	
 	free(stack);
-	return 0;
-}
-
-int
-main(int argc, char **argv)
-{
-	Node *root = create_tree(128);
-	root->value = 22;
-	insert(24, root);
-	insert(2, root);
-	insert(44, root);
-	insert(23, root);
-	delete(44, root);
-	
 	return 0;
 }
