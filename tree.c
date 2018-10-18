@@ -4,6 +4,14 @@
 
 bool avl_flag = false;
 
+enum tree_type {
+	BST,
+	AVL,
+	RB,
+	HEAP,
+	SPLAY
+}
+
 typedef struct _node {
 	struct _node *child[2];
 	int load;
