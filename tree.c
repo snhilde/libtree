@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-bool avl_flag = false;
-
 enum tree_type {
 	BST,
 	AVL,
@@ -224,8 +222,6 @@ insert(int value, Node *root) {
 int
 main(int argc, char **argv)
 {
-	avl_flag = true;
-	
 	Node *root = create_tree(128);
 	root->value = 22;
 	insert(24, root);
