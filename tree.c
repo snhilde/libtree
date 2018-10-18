@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-enum tree_type {
+enum tree_type
+{
 	BST,
 	AVL,
 	RB,
@@ -10,7 +11,8 @@ enum tree_type {
 	SPLAY
 };
 
-typedef struct _node {
+typedef struct _node
+{
 	struct _node *child[2];
 	int load;
 	int value;
@@ -19,14 +21,16 @@ typedef struct _node {
 	int *count;
 } Node;
 
-typedef struct _stack {
+typedef struct _stack
+{
 	Node **array;
 	int count;
 	int capacity;
 } Stack;
 
 static int
-bitwise_log2(int num) {
+bitwise_log2(int num)
+{
 	int j;
 	
 	j = 0;
@@ -39,7 +43,8 @@ bitwise_log2(int num) {
 }
 
 static Node *
-create_root(void) {
+create_root(void)
+{
 	Node *root = malloc(sizeof(Node));
 	root->child[0] = NULL;
 	root->child[1] = NULL;
@@ -49,7 +54,8 @@ create_root(void) {
 }
 
 static Node *
-create_node(int value, Node **array, int index, int *count) {
+create_node(int value, Node **array, int index, int *count)
+{
 	Node *node;
 	
 	node = create_root();
@@ -64,7 +70,8 @@ create_node(int value, Node **array, int index, int *count) {
 }
 
 static Node *
-create_tree(int num_nodes) {
+create_tree(int num_nodes)
+{
 	Node *root;
 	
 	root = create_root();
@@ -84,7 +91,8 @@ create_tree(int num_nodes) {
 }
 
 static Stack *
-create_stack(int node_count) {
+create_stack(int node_count)
+{
 	Stack *stack;
 	
 	stack = malloc(sizeof(Stack));
@@ -97,25 +105,29 @@ create_stack(int node_count) {
 }
 
 static int
-push(Stack *stack, Node *node) {
+push(Stack *stack, Node *node)
+{
 	stack->array[stack->count++] = node;
 	
 	return 0;
 }
 
 static Node *
-pop(Stack *stack) {
+pop(Stack *stack)
+{
 	return stack->array[--stack->count];
 }
 
 static int
-rebalance(Stack *stack) {
+rebalance(Stack *stack)
+{
 	
 	return 0;
 }
 
 static Node *
-find_parent(int value, Node *root, Stack *stack) {
+find_parent(int value, Node *root, Stack *stack)
+{
 	Node *parent;
 	int direction;
 	
@@ -133,7 +145,8 @@ find_parent(int value, Node *root, Stack *stack) {
 }
 
 static int
-delete_node(Node *node) {
+delete_node(Node *node)
+{
 	(*node->count)--;
 	free(node);
 	
@@ -141,7 +154,8 @@ delete_node(Node *node) {
 }
 
 static int
-delete(int value, Node *root) {
+delete(int value, Node *root)
+{
 	Stack *stack;
 	Node *parent;
 	int direction;
@@ -198,7 +212,8 @@ delete(int value, Node *root) {
 }
 
 static int
-insert(int value, Node *root) {
+insert(int value, Node *root)
+{
 	Stack *stack;
 	Node **array;
 	Node *parent;
