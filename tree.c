@@ -172,14 +172,14 @@ delete(int value, Node *root)
 		/* node to be deleted has two children */
 		
 		/* strategy:
-		 * 1. remove node of interest and replace with next-smallest node
-		 * 2. when swapping out next-smallest node, reconnect its child
+		 * 1. Remove node of interest and replace with next-smallest node.
+		 * 2. When swapping out next-smallest node, connect its child
 		 * 	  (by definition, it can only have one, and it will be to the left)
-		 * 	  with its parent
-		 * 3. rebalance this new connection, if necessary
-		 * 4. reconnect the children of the node to be deleted with the
-		 *    next-smallest node, which is being swapped up
-		 * 5. rebalance upwards from deletion */
+		 * 	  to its parent.
+		 * 3. Rebalance this new connection, if necessary.
+		 * 4. Set the swap node into place and connect the children,
+		 *    completing the swap.
+		 * 5. Rebalance upwards from deletion. */
 		
 		Stack *stack2;
 		Node *node_swap; /* node to be swapped with node to be deleted */
