@@ -12,6 +12,7 @@ enum tree_type
 
 typedef struct _node
 {
+	void *data;
 	struct _node *child[2];
 	int load;
 	int value;
@@ -42,22 +43,15 @@ bitwise_log2(int num)
 }
 
 static Node *
-create_root(void)
-{
-	Node *root = malloc(sizeof(Node));
-	root->child[0] = NULL;
-	root->child[1] = NULL;
-	root->load = 0;
-	
-	return root;
-}
-
-static Node *
 create_node(int value, Node **array, int index, int *count)
 {
 	Node *node;
 	
-	node = create_root();
+	node = malloc(sizeof(Node));
+	node->data = NULL;
+	node->child[0] = NULL;
+	node->child[1] = NULL;
+	node->load = 0;
 	node->value = value;
 	node->array = array;
 	node->index = index;
@@ -71,36 +65,16 @@ create_node(int value, Node **array, int index, int *count)
 static Node *
 create_tree(int num_nodes)
 {
+	Node **array;
+	int *count;
 	Node *root;
 	
-	root = create_root();
+	array = calloc(num_nodes, sizeof(Node *));
+	count = calloc(1, sizeof(int));
 	
-	root->value = 0;
-	
-	root->array = calloc(num_nodes, sizeof(Node *));
-	root->array[0] = NULL;
-	root->array[1] = root;
-	
-	root->index = 1;
-	
-	root->count = calloc(1, sizeof(int));
-	*root->count = 1;
+	root = create_node(0, array, 1, count);
 	
 	return root;
-}
-
-static Stack *
-create_stack(int node_count)
-{
-	Stack *stack;
-	
-	stack = malloc(sizeof(Stack));
-	
-	stack->capacity = 2 * bitwise_log2(node_count);
-	stack->array = calloc(stack->capacity, sizeof(Node *));
-	stack->count = 0;
-	
-	return stack;
 }
 
 static int
@@ -115,6 +89,20 @@ static Node *
 pop(Stack *stack)
 {
 	return stack->array[--stack->count];
+}
+
+static Stack *
+create_stack(int node_count)
+{
+	Stack *stack;
+	
+	stack = malloc(sizeof(Stack));
+	
+	stack->capacity = 2 * bitwise_log2(node_count);
+	stack->array = calloc(stack->capacity, sizeof(Node *));
+	stack->count = 0;
+	
+	return stack;
 }
 
 static int
