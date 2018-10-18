@@ -188,7 +188,7 @@ delete(int value, Node *root)
 		stack2 = create_stack(*root->count);
 		node_swap = find_parent(node_del->value, parent, stack2);
 		
-		pop(stack2); /* remove node to be swapped from stack2 */
+		pop(stack2); /* reverse stack by one, throw away node */
 		node_swap_parent = pop(stack2);
 		
 		node_swap_parent->child[1] = node_swap->child[0];
