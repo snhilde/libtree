@@ -56,13 +56,13 @@ typedef struct _stack
 | | `Node *  create_tree(int num_nodes)` |
 | --- | --- |
 | Description | description |
-| Arguments | args |
+| Argument | args |
 | Return Value | return |
 
 | | `Stack * create_stack(int node_count)` |
 | --- | --- |
 | Description | description |
-| Arguments | args |
+| Argument | args |
 | Return Value | return |
 
 #### Node Functions
@@ -113,13 +113,13 @@ typedef struct _stack
 | | `Node * pop(Stack *stack)` |
 | --- | --- |
 | Description | description |
-| Arguments | args |
+| Argument | args |
 | Return Value | return |
 
 | | `Node * peek(Stack *stack)` |
 | --- | --- |
 | Description | description |
-| Arguments | args |
+| Argument | args |
 | Return Value | return |
 
 #### Traversal Functions
@@ -151,7 +151,7 @@ typedef struct _stack
 | | `int bitwise_log2(int num)` |
 | --- | --- |
 | Description | description |
-| Arguments | args |
+| Argument | args |
 | Return Value | return |
 
 | | `int zip(Node **node, int direction)` |
@@ -163,11 +163,11 @@ typedef struct _stack
 | | `int rebalance(Node **node)` |
 | --- | --- |
 | Description | description |
-| Arguments | args |
+| Argument | args |
 | Return Value | return |
 
 | | `int delete_node(Node *node)` |
 | --- | --- |
 | Description | description |
-| Arguments | args |
+| Argument | args |
 | Return Value | return |
