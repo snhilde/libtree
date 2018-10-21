@@ -59,7 +59,7 @@ create_node(int value, int *count)
 }
 
 static Node *
-create_tree(int num_nodes)
+create_tree(void)
 {
 	int *count;
 	Node *root;
