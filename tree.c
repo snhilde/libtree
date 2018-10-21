@@ -298,3 +298,10 @@ insert(int value, Node *root)
 	free(stack);
 	return 0;
 }
+
+static int
+breadth_first_traversal(Node *root, Stack *array)
+{
+	
+	return 0;
+}
