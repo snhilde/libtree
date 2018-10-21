@@ -66,107 +66,107 @@ typedef struct _stack
 | Return Value | return |
 
 #### Node Functions
-| `int insert(int value, Node *root)` |
+| | `int insert(int value, Node *root)` |
 | --- | --- |
 | Description | description |
 | Arguments | args |
 | Return Value | return |
 
-| `int delete(int value, Node *root)` |
+| | `int delete(int value, Node *root)` |
 | --- | --- |
 | Description | description |
 | Arguments | args |
 | Return Value | return |
 
-| `Node * find_parent(int value, Node *root, Stack *stack)` |
+| | `Node * find_parent(int value, Node *root, Stack *stack)` |
 | --- | --- |
 | Description | description |
 | Arguments | args |
 | Return Value | return |
 
 #### Rotation Functions
-| `int balance(Stack *stack, int value)` |
+| | `int balance(Stack *stack, int value)` |
 | --- | --- |
 | Description | description |
 | Arguments | args |
 | Return Value | return |
 
-| `int zig(Node **node, int direction)` |
+| | `int zig(Node **node, int direction)` |
 | --- | --- |
 | Description | description |
 | Arguments | args |
 | Return Value | return |
 
-| `int zag(Node **node, int direction)` |
+| | `int zag(Node **node, int direction)` |
 | --- | --- |
 | Description | description |
 | Arguments | args |
 | Return Value | return |
 
 #### Stack Functions
-| `int push(Stack *stack, Node *node)` |
+| | `int push(Stack *stack, Node *node)` |
 | --- | --- |
 | Description | description |
 | Arguments | args |
 | Return Value | return |
 
-| `Node * pop(Stack *stack)` |
+| | `Node * pop(Stack *stack)` |
 | --- | --- |
 | Description | description |
 | Arguments | args |
 | Return Value | return |
 
-| `Node * peek(Stack *stack)` |
+| | `Node * peek(Stack *stack)` |
 | --- | --- |
 | Description | description |
 | Arguments | args |
 | Return Value | return |
 
 #### Traversal Functions
-| `int breadth_first_traversal(Node *root, Stack *stack)` |
+| | `int breadth_first_traversal(Node *root, Stack *stack)` |
 | --- | --- |
 | Description | description |
 | Arguments | args |
 | Return Value | return |
 
-| `int pre_order_traversal(Node *root, Stack *stack)` |
+| | `int pre_order_traversal(Node *root, Stack *stack)` |
 | --- | --- |
 | Description | description |
 | Arguments | args |
 | Return Value | return |
 
-| `int in_order_traversal(Node *root, Stack *stack)` |
+| | `int in_order_traversal(Node *root, Stack *stack)` |
 | --- | --- |
 | Description | description |
 | Arguments | args |
 | Return Value | return |
 
-| `int post_order_traversal(Node *root, Stack *stack)` |
+| | `int post_order_traversal(Node *root, Stack *stack)` |
 | --- | --- |
 | Description | description |
 | Arguments | args |
 | Return Value | return |
 
 #### Helper Functions
-| `int bitwise_log2(int num)` |
+| | `int bitwise_log2(int num)` |
 | --- | --- |
 | Description | description |
 | Arguments | args |
 | Return Value | return |
 
-| `int zip(Node **node, int direction)` |
+| | `int zip(Node **node, int direction)` |
 | --- | --- |
 | Description | description |
 | Arguments | args |
 | Return Value | return |
 
-| `int rebalance(Node **node)` |
+| | `int rebalance(Node **node)` |
 | --- | --- |
 | Description | description |
 | Arguments | args |
 | Return Value | return |
 
-| `int delete_node(Node *node)` |
+| | `int delete_node(Node *node)` |
 | --- | --- |
 | Description | description |
 | Arguments | args |
