@@ -233,6 +233,12 @@ insert(int value, Node *root)
 }
 
 static int
+destroy_tree(Node *root)
+{
+	return 0;
+}
+
+static int
 destroy_node(Node *node)
 {
 	(*node->count)--;
