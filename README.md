@@ -21,33 +21,22 @@ Contents:
 ```c
 typedef struct _node
 {
-	void *data;
-	struct _node *child[2];
-	int load;
-	int value;
-	int *count;
+	void *data;				/* pointer to user-supplied data */
+	struct _node *child[2];	/* pointers to left and right children */
+	int load;				/* balance factor, only used by balanced trees */
+	int value;				/* numerical value for sorting tree */
+	int *count;				/* pointer to number of nodes in tree */
 } Node;
 ```
-##### Data Fields
-* `void *data`:		pointer to user-supplied data
-* `struct _node *child[2]`:	pointers to left and right children
-* `int  load`:		balance factor, only used by balanced trees
-* `int  value`:		numerical value for sorting tree
-* `int *count`:		pointer to number of nodes in tree
-
 #### Stack
 ```c
 typedef struct _stack
 {
-	Node **array;
-	int count;
-	int capacity;
+	Node **array;	/* pointer to stack array */
+	int count;		/* number of nodes in stack */
+	int capacity;	/* maximum capacity of stack */
 } Stack;
 ```
-##### Data Fields
-`Node **array`:		pointer to stack array
-` int   count`:		number of nodes in stack
-` int   capacity`:	maximum capacity of stack
 
 ## Functions
 * [Object Creation](#object-creation)
