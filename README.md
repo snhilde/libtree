@@ -14,7 +14,7 @@ Contents:
 	* [Helper Functions](#helper-functions)
 
 ## Data Structures
-* [Tree Node](#tree_node)
+* [Tree Node](#tree-node)
 * [Stack](#stack)
 
 #### Tree Node
@@ -29,11 +29,11 @@ typedef struct _node
 } Node;
 ```
 ##### Data Fields
-`        void *data`:		pointer to user-supplied data
-`struct _node *child[2]`:	pointers to left and right children
-`         int  load`:		balance factor, only used by balanced trees
-`         int  value`:		numerical value for sorting tree
-`         int *count`:		pointer to number of nodes in tree
+* `        void *data`:		pointer to user-supplied data
+* `struct _node *child[2]`:	pointers to left and right children
+* `         int  load`:		balance factor, only used by balanced trees
+* `         int  value`:		numerical value for sorting tree
+* `         int *count`:		pointer to number of nodes in tree
 
 #### Stack
 ```
