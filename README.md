@@ -18,7 +18,7 @@ Contents:
 * [Stack](#stack)
 
 #### Tree Node
-```
+```c
 typedef struct _node
 {
 	void *data;
@@ -36,7 +36,7 @@ typedef struct _node
 * `int *count`:		pointer to number of nodes in tree
 
 #### Stack
-```
+```c
 typedef struct _stack
 {
 	Node **array;
