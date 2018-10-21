@@ -214,6 +214,25 @@ find_parent(int value, Node *root, Stack *stack)
 }
 
 static int
+insert(int value, Node *root)
+{
+	Stack *stack;
+	Node *parent;
+	int direction;
+	
+	stack = create_stack(*root->count);
+	parent = find_parent(value, root, stack);
+	
+	direction = value > parent->value;
+	parent->child[direction] = create_node(value, root->count);
+	
+	balance(stack, value);
+	
+	free(stack);
+	return 0;
+}
+
+static int
 delete_node(Node *node)
 {
 	(*node->count)--;
@@ -274,25 +293,6 @@ delete(int value, Node *root)
 		parent->child[direction] = node_del->child[0] ? node_del->child[0] : node_del->child[1];
 			
 	delete_node(node_del);
-	balance(stack, value);
-	
-	free(stack);
-	return 0;
-}
-
-static int
-insert(int value, Node *root)
-{
-	Stack *stack;
-	Node *parent;
-	int direction;
-	
-	stack = create_stack(*root->count);
-	parent = find_parent(value, root, stack);
-	
-	direction = value > parent->value;
-	parent->child[direction] = create_node(value, root->count);
-	
 	balance(stack, value);
 	
 	free(stack);
