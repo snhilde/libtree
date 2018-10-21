@@ -91,7 +91,7 @@ create_stack(int node_count)
 	return stack;
 }
 
-static int
+void
 destroy_stack(Stack *stack)
 {
 	free(stack->array);
