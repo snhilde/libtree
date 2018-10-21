@@ -48,6 +48,7 @@ typedef struct _stack
 
 #### Object Creation
 | `Node *  create_node(int value, int *count)` |
+| ------------------- |
 | Create new node. |
 | Arguments | value of node, pointer to node count for tree |
 | Return Value | pointer to a new node |
