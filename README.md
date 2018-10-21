@@ -47,8 +47,8 @@ typedef struct _stack
 * [Helper Functions](#helper-functions)
 
 #### Object Creation
-| `Node *  create_node(int value, int *count)` |
-| ------------------- |
+| `Node *  create_node(int value, int *count)` | |
+| ------------------- | ------------------- |
 | Create new node. |
 | Arguments | value of node, pointer to node count for tree |
 | Return Value | pointer to a new node |
