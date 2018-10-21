@@ -67,7 +67,7 @@ typedef struct _stack
 
 | | `void destroy_stack(Stack *stack)` |
 | ---- | ---- |
-| Description | Destroy stack. |
+| Description | Destroy stack and free memory. |
 | Argument    | stack: stack to be destroyed |
 | Return      | no return value |
 
