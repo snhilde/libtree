@@ -21,11 +21,11 @@ Contents:
 ```c
 typedef struct _node
 {
-	void *data;				/* pointer to user-supplied data */
+	void *data;		/* pointer to user-supplied data */
 	struct _node *child[2];	/* pointers to left and right children */
-	int load;				/* balance factor, only used by balanced trees */
-	int value;				/* numerical value for sorting tree */
-	int *count;				/* pointer to number of nodes in tree */
+	int load;		/* balance factor, only used by balanced trees */
+	int value;		/* numerical value for sorting tree */
+	int *count;		/* pointer to number of nodes in tree */
 } Node;
 ```
 #### Stack
@@ -33,7 +33,7 @@ typedef struct _node
 typedef struct _stack
 {
 	Node **array;	/* pointer to stack array */
-	int count;		/* number of nodes in stack */
+	int count;	/* number of nodes in stack */
 	int capacity;	/* maximum capacity of stack */
 } Stack;
 ```
