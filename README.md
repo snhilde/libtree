@@ -48,7 +48,6 @@ typedef struct _stack
 
 #### Object Creation
 `Node *  create_node(int value, int index, int *count)`
-test format
 `Node *  create_tree(int num_nodes)`
 `Stack * create_stack(int node_count)`
 #### Node Functions
