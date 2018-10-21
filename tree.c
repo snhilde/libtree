@@ -243,7 +243,7 @@ insert(int value, Node *root)
 	
 	balance(stack, value);
 	
-	free(stack);
+	destroy_stack(stack);
 	return 0;
 }
 
@@ -302,7 +302,7 @@ destroy(int value, Node *root)
 		
 		balance(stack2, value);
 		
-		free(stack2);
+		destroy_stack(stack2);
 	} else
 		/* node to be deleted has zero or one children */
 		parent->child[direction] = node_del->child[0] ? node_del->child[0] : node_del->child[1];
@@ -310,7 +310,7 @@ destroy(int value, Node *root)
 	destroy_node(node_del);
 	balance(stack, value);
 	
-	free(stack);
+	destroy_stack(stack);
 	return 0;
 }
 
