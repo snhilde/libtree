@@ -71,6 +71,12 @@ create_tree(void)
 	return root;
 }
 
+static int
+destroy_tree(Node *root)
+{
+	return 0;
+}
+
 static Stack *
 create_stack(int node_count)
 {
@@ -229,12 +235,6 @@ insert(int value, Node *root)
 	balance(stack, value);
 	
 	free(stack);
-	return 0;
-}
-
-static int
-destroy_tree(Node *root)
-{
 	return 0;
 }
 
