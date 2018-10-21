@@ -50,7 +50,7 @@ typedef struct _stack
 | | `Node *  create_node(int value, int *count)` |
 | ------------------- | ------------------- |
 | Description | Create new node. |
-| Arguments | value of node, pointer to node count for tree |
+| Arguments | value: value of node<br>count: pointer to node count for tree |
 | Return Value | pointer to a new node |
 
 | | `Node *  create_tree(int num_nodes)` |
