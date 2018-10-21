@@ -16,7 +16,6 @@ typedef struct _node
 	struct _node *child[2];
 	int load;
 	int value;
-	struct _node **array;
 	int index;
 	int *count;
 } Node;
@@ -43,7 +42,7 @@ bitwise_log2(int num)
 }
 
 static Node *
-create_node(int value, Node **array, int index, int *count)
+create_node(int value, int index, int *count)
 {
 	Node *node;
 	
@@ -53,7 +52,6 @@ create_node(int value, Node **array, int index, int *count)
 	node->child[1] = NULL;
 	node->load = 0;
 	node->value = value;
-	node->array = array;
 	node->index = index;
 	node->count = count;
 	
@@ -65,14 +63,12 @@ create_node(int value, Node **array, int index, int *count)
 static Node *
 create_tree(int num_nodes)
 {
-	Node **array;
 	int *count;
 	Node *root;
 	
-	array = calloc(num_nodes, sizeof(Node *));
 	count = calloc(1, sizeof(int));
 	
-	root = create_node(0, array, 1, count);
+	root = create_node(0, 1, count);
 	
 	return root;
 }
@@ -290,19 +286,16 @@ static int
 insert(int value, Node *root)
 {
 	Stack *stack;
-	Node **array;
 	Node *parent;
 	int index, direction;
 	
-	array = root->array;
 	stack = create_stack(*root->count);
 	parent = find_parent(value, root, stack);
 	
 	direction = value > parent->value;
 	index = parent->index * 2 + direction;
-	parent->child[direction] = create_node(value, array, index, root->count);
+	parent->child[direction] = create_node(value, index, root->count);
 	
-	array[index] = parent->child[direction];
 	balance(stack, value);
 	
 	free(stack);
