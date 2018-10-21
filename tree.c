@@ -300,7 +300,28 @@ insert(int value, Node *root)
 }
 
 static int
-breadth_first_traversal(Node *root, Stack *array)
+breadth_first_traversal(Node *root, Stack *stack)
+{
+	
+	return 0;
+}
+
+static int
+pre_order_traversal(Node *root, Stack *stack)
+{
+	
+	return 0;
+}
+
+static int
+in_order_traversal(Node *root, Stack *stack)
+{
+	
+	return 0;
+}
+
+static int
+post_order_traversal(Node *root, Stack *stack)
 {
 	
 	return 0;
