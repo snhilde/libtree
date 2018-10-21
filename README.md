@@ -49,11 +49,11 @@ typedef struct _stack
 #### Object Functions
 | | `Node * create_tree(void)` |
 | ---- | ---- |
-| Description | Create new tree. Memory is allocated for one node and one integer. |
+| Description | Create new tree. Memory is allocated for one node and one integer. Must be freed with destroy_tree() |
 | Argument    | none |
 | Return      | pointer to root node of tree |
 
-| | `Node * destroy_tree(Node *root)` |
+| | `int destroy_tree(Node *root)` |
 | ---- | ---- |
 | Description | Destroy tree, including all nodes within. |
 | Argument    | root: root node of tree |
