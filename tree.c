@@ -77,20 +77,6 @@ create_tree(int num_nodes)
 	return root;
 }
 
-static int
-push(Stack *stack, Node *node)
-{
-	stack->array[stack->count++] = node;
-	
-	return 0;
-}
-
-static Node *
-pop(Stack *stack)
-{
-	return stack->array[--stack->count];
-}
-
 static Stack *
 create_stack(int node_count)
 {
@@ -106,8 +92,108 @@ create_stack(int node_count)
 }
 
 static int
-rebalance(Stack *stack)
+push(Stack *stack, Node *node)
 {
+	stack->array[stack->count++] = node;
+	
+	return 0;
+}
+
+static Node *
+pop(Stack *stack)
+{
+	return stack->array[--stack->count];
+}
+
+static Node *
+peek(Stack *stack)
+{
+	return stack->array[stack->count - 1];
+}
+
+static int
+zip(Node **node, int direction)
+{
+	Node *node_new;
+	
+	node_new = (*node)->child[direction];
+	(*node)->child[direction] = node_new->child[!direction];
+	node_new->child[!direction] = *node;
+	
+	*node = node_new;
+	
+	return 0;
+}
+
+static int
+zig(Node **node, int direction)
+{
+	zip(node, direction);
+	
+	(*node)->load = 0;
+	(*node)->child[!direction]->load = 0;
+	
+	return 0;
+}
+
+static int
+zag(Node **node, int direction)
+{
+	zip(&(*node)->child[direction], !direction);
+	zip(node, direction);
+	
+	if (!direction)
+		direction = -1;
+	
+	if (direction == (*node)->load) {
+		(*node)->child[!direction]->load = direction * -1;
+		(*node)->child[direction]->load = 0;
+	} else {
+		(*node)->child[!direction]->load = 0;
+		(*node)->child[direction]->load = direction * -1;
+	}
+	(*node)->load = 0;
+	
+	return 0;
+}
+
+static int
+rebalance(Node **node)
+{
+	int direction;
+	
+	direction = !((*node)->load & 4); /* use 2's complement to determine sign of load */
+	
+	if ((*node)->load >> 2 == (*node)->child[direction]->load >> 2)
+		zig(node, direction);
+	else
+		zag(node, direction);
+	
+	return 0;
+}
+
+static int
+balance(Stack *stack, int value)
+{
+	int i;
+	Node *node;
+	
+	for (i = stack->count; i; i--) {
+		node = pop(stack);
+		
+		if (value > node->value)
+			node->load++;
+		else
+			node->load--;
+		
+		switch (node->load) {
+			case 2:
+			case -2:
+				rebalance(&node);
+			case 0:
+				return 0;
+		}
+	}
 	
 	return 0;
 }
@@ -119,13 +205,15 @@ find_parent(int value, Node *root, Stack *stack)
 	int direction;
 	
 	parent = root;
-	push(stack, parent);
 	direction = value > parent->value;
+	if (stack)
+		push(stack, parent);
 	
 	while (parent->child[direction] && parent->child[direction]->value != value) {
 		parent = parent->child[direction];
-		push(stack, parent);
 		direction = value > parent->value;
+		if (stack)
+			push(stack, parent);
 	}
 	
 	return parent;
@@ -184,7 +272,7 @@ delete(int value, Node *root)
 		node_swap->child[1] = node_del->child[1];
 		parent->child[direction] = node_swap;
 		
-		rebalance(stack2);
+		balance(stack2, value);
 		
 		free(stack2);
 	} else
@@ -192,7 +280,7 @@ delete(int value, Node *root)
 		parent->child[direction] = node_del->child[0] ? node_del->child[0] : node_del->child[1];
 			
 	delete_node(node_del);
-	rebalance(stack);
+	balance(stack, value);
 	
 	free(stack);
 	return 0;
@@ -215,7 +303,7 @@ insert(int value, Node *root)
 	parent->child[direction] = create_node(value, array, index, root->count);
 	
 	array[index] = parent->child[direction];
-	rebalance(stack);
+	balance(stack, value);
 	
 	free(stack);
 	return 0;
