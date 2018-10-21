@@ -16,7 +16,6 @@ typedef struct _node
 	struct _node *child[2];
 	int load;
 	int value;
-	int index;
 	int *count;
 } Node;
 
@@ -42,7 +41,7 @@ bitwise_log2(int num)
 }
 
 static Node *
-create_node(int value, int index, int *count)
+create_node(int value, int *count)
 {
 	Node *node;
 	
@@ -52,7 +51,6 @@ create_node(int value, int index, int *count)
 	node->child[1] = NULL;
 	node->load = 0;
 	node->value = value;
-	node->index = index;
 	node->count = count;
 	
 	(*count)++;
@@ -287,14 +285,13 @@ insert(int value, Node *root)
 {
 	Stack *stack;
 	Node *parent;
-	int index, direction;
+	int direction;
 	
 	stack = create_stack(*root->count);
 	parent = find_parent(value, root, stack);
 	
 	direction = value > parent->value;
-	index = parent->index * 2 + direction;
-	parent->child[direction] = create_node(value, index, root->count);
+	parent->child[direction] = create_node(value, root->count);
 	
 	balance(stack, value);
 	
