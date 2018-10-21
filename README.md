@@ -47,9 +47,9 @@ typedef struct _stack
 * [Helper Functions](#helper-functions)
 
 #### Object Creation
-`Node *  create_node(int value, int index, int *count)`
-`Node *  create_tree(int num_nodes)`
-`Stack * create_stack(int node_count)`
+* `Node *  create_node(int value, int index, int *count)`
+* `Node *  create_tree(int num_nodes)`
+* `Stack * create_stack(int node_count)`
 #### Node Functions
 `int     insert(int value, Node *root)`
 `int     delete(int value, Node *root)`
