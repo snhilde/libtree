@@ -47,32 +47,44 @@ typedef struct _stack
 * [Helper Functions](#helper-functions)
 
 #### Object Functions
+| | `Node * create_tree(void)` |
+| ---- | ---- |
+| Description | Create new tree. Memory is allocated for one node and one integer. |
+| Argument    | none |
+| Return      | pointer to root node of tree |
+
+| | `Node * destroy_tree(Node *root)` |
+| ---- | ---- |
+| Description | Destroy tree, including all nodes within. |
+| Argument    | root: root node of tree |
+| Return      | 0 on success, 1 on failure |
+
+| | `Stack * create_stack(int node_count)` |
+| ---- | ---- |
+| Description | Create new stack. Memory is allocated for stack struct and number of pointers. |
+| Argument    | node_count: number of nodes to reserve space for, rec. height of tree |
+| Return      | pointer to new stack |
+
+| | `void destroy_stack(Stack *stack)` |
+| ---- | ---- |
+| Description | Destroy stack. |
+| Argument    | stack: stack to be destroyed |
+| Return      | no return value |
+
+#### Node Functions
 | | `Node *  create_node(int value, int *count)` |
 | ---- | ---- |
 | Description | Create new node. The node must be freed with `destroy()` after use. |
 | Arguments   | value: value of node<br>count: pointer to node count for tree |
 | Return      | pointer to a new node |
 
-| | `Node *  create_tree(void)` |
-| ---- | ---- |
-| Description | Create new tree. This will allocate memory for one node as well as one integer. |
-| Argument    | none |
-| Return      | pointer to root node of tree |
-
-| | `Stack * create_stack(int node_count)` |
-| ---- | ---- |
-| Description | description |
-| Argument    | args |
-| Return      | return |
-
-#### Node Functions
-| | `int insert(int value, Node *root)` |
+| | `int destroy(int value, Node *root)` |
 | ---- | ---- |
 | Description | description |
 | Arguments   | args |
 | Return      | return |
 
-| | `int destroy(int value, Node *root)` |
+| | `int insert(int value, Node *root)` |
 | ---- | ---- |
 | Description | description |
 | Arguments   | args |
