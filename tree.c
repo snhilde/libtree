@@ -92,6 +92,15 @@ create_stack(int node_count)
 }
 
 static int
+destroy_stack(Stack *stack)
+{
+	free(stack->array);
+	free(stack);
+	
+	return 0;
+}
+
+static int
 push(Stack *stack, Node *node)
 {
 	stack->array[stack->count++] = node;
