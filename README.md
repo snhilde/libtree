@@ -2,16 +2,16 @@
 Library for creating binary tree objects.
 
 Contents:
-[Data Structures](#data-structures)
-* [Tree Node](#tree_node)
-* [Stack](#stack)
-[Functions](#functions)
-* [Object Creation](#object-creation)
-* [Node Functions](#node-functions)
-* [Rotation Functions](#rotation-functions)
-* [Stack Functions](#stack-functions)
-* [Traversal Functions](#traversal-functions)
-* [Helper Functions](#helper-functions)
+* [Data Structures](#data-structures)
+	* [Tree Node](#tree_node)
+	* [Stack](#stack)
+* [Functions](#functions)
+	* [Object Creation](#object-creation)
+	* [Node Functions](#node-functions)
+	* [Rotation Functions](#rotation-functions)
+	* [Stack Functions](#stack-functions)
+	* [Traversal Functions](#traversal-functions)
+	* [Helper Functions](#helper-functions)
 
 ## Data Structures
 [Tree Node](#tree_node)
