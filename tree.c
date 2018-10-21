@@ -233,7 +233,7 @@ insert(int value, Node *root)
 }
 
 static int
-delete_node(Node *node)
+destroy_node(Node *node)
 {
 	(*node->count)--;
 	free(node);
@@ -242,7 +242,7 @@ delete_node(Node *node)
 }
 
 static int
-delete(int value, Node *root)
+destroy(int value, Node *root)
 {
 	Stack *stack;
 	Node *parent;
@@ -292,7 +292,7 @@ delete(int value, Node *root)
 		/* node to be deleted has zero or one children */
 		parent->child[direction] = node_del->child[0] ? node_del->child[0] : node_del->child[1];
 			
-	delete_node(node_del);
+	destroy_node(node_del);
 	balance(stack, value);
 	
 	free(stack);
