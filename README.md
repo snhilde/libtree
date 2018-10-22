@@ -62,124 +62,118 @@ typedef struct _stack
 | | `Stack * create_stack(int node_count)` |
 | ---- | ---- |
 | Description | Create new stack. Memory is allocated for stack struct and number of pointers. Must be freed with destroy_stack() |
-| Argument    | node_count: number of nodes to reserve space for, rec. height of tree |
+| Argument    | `node_count`: number of nodes to reserve space for, usually height of tree |
 | Return      | pointer to new stack |
 
 | | `void destroy_stack(Stack *stack)` |
 | ---- | ---- |
 | Description | Destroy stack and free memory. |
-| Argument    | stack: stack to be destroyed |
+| Argument    | `stack`: stack to be destroyed |
 | Return      | no return value |
 
 #### Node Functions
 | | `Node *  create_node(int value, int *count)` |
 | ---- | ---- |
 | Description | Create new node. The node must be freed with `destroy()` after use. |
-| Arguments   | value: value of node<br>count: pointer to node count for tree |
+| Arguments   | `value`: value of node<br>`count`: pointer to count of nodes, usually `root->count` |
 | Return      | pointer to a new node |
 
-| | `int destroy(int value, Node *root)` |
+| | `int destroy_node(int value, Node *root)` |
 | ---- | ---- |
-| Description | description |
-| Arguments   | args |
-| Return      | return |
+| Description | Destroy node and free memory. |
+| Arguments   | `value`: value of node to be found and deleted<br>`root`: root of node's tree |
+| Return      | 0 on success, 1 on failure |
 
 | | `int insert(int value, Node *root)` |
 | ---- | ---- |
-| Description | description |
-| Arguments   | args |
-| Return      | return |
+| Description | Add node to tree as leaf in sorted order. |
+| Arguments   | `value`: value of node for ordering<br>`root`: root of tree |
+| Return      | 0 on success, 1 on failure |
 
 | | `Node * find_parent(int value, Node *root, Stack *stack)` |
 | ---- | ---- |
-| Description | description |
-| Arguments   | args |
-| Return      | return |
+| Description | Get parent of node. |
+| Arguments   | `value`: value of node whose parent will be found<br>`root`: root of tree<br>`stack` (optional): stack to be grown during iterative search |
+| Return      | parent node of node with value `value` |
 
 #### Rotation Functions
 | | `int balance(Stack *stack, int value)` |
 | ---- | ---- |
-| Description | description |
-| Arguments   | args |
-| Return      | return |
+| Description | Balance tree path following AVL rules |
+| Arguments   | `stack`: path of nodes to iteratively traverse upward toward root<br>`value`: value of latest node, used for calculating load factor |
+| Return      | 0 on success, 1 on failure |
 
-| | `int zig(Node **node, int direction)` |
+| | `int zig(Node **node)` |
 | ---- | ---- |
-| Description | description |
-| Arguments   | args |
-| Return      | return |
+| Description | Single rotation. |
+| Argument    | `node`: address of node with load factor of |2| |
+| Return      | 0 on success, 1 on failure |
 
-| | `int zag(Node **node, int direction)` |
+| | `int zag(Node **node)` |
 | ---- | ---- |
-| Description | description |
-| Arguments   | args |
-| Return      | return |
+| Description | Double rotation. |
+| Argument    | `node`: address of node with load factor of |2| |
+| Return      | 0 on success, 1 on failure |
 
 #### Stack Functions
 | | `int push(Stack *stack, Node *node)` |
 | ---- | ---- |
-| Description | description |
-| Arguments   | args |
-| Return      | return |
+| Description | Add node to stack. |
+| Arguments   | `stack`: stack to be grown<br>`node`: node to add to stack |
+| Return      | 0 on success, 1 on failure |
 
 | | `Node * pop(Stack *stack)` |
 | ---- | ---- |
-| Description | description |
-| Argument    | args |
-| Return      | return |
+| Description | Remove most recent node from stack.<br>Note: This does not actually delete the node from memory. It decrements the head pointer. |
+| Argument    | `stack`: stack to pull from |
+| Return      | pointer to node |
 
 | | `Node * peek(Stack *stack)` |
 | ---- | ---- |
-| Description | description |
-| Argument    | args |
-| Return      | return |
+| Description | See the most recent node at the top of the stack. |
+| Argument    | `stack`: stack to examine. |
+| Return      | pointer to node |
 
 #### Traversal Functions
 | | `int breadth_first_traversal(Node *root, Stack *stack)` |
 | ---- | ---- |
-| Description | description |
-| Arguments   | args |
-| Return      | return |
+| Description | Create stack of nodes by passing over tree breadth-first (level by level). |
+| Arguments   | `root`: root of tree<br>`stack`: stack to grow with nodes |
+| Return      | 0 on success, 1 on failure |
 
 | | `int pre_order_traversal(Node *root, Stack *stack)` |
 | ---- | ---- |
-| Description | description |
-| Arguments   | args |
-| Return      | return |
+| Description | Create stack of nodes by passing over tree pre order (parent, left, right). |
+| Arguments   | `root`: root of tree<br>`stack`: stack to grow with nodes |
+| Return      | 0 on success, 1 on failure |
 
 | | `int in_order_traversal(Node *root, Stack *stack)` |
 | ---- | ---- |
-| Description | description |
-| Arguments   | args |
-| Return      | return |
+| Description | Create stack of nodes by passing over tree in order (left, parent, right). |
+| Arguments   | `root`: root of tree<br>`stack`: stack to grow with nodes |
+| Return      | 0 on success, 1 on failure |
 
 | | `int post_order_traversal(Node *root, Stack *stack)` |
 | ---- | ---- |
-| Description | description |
-| Arguments   | args |
-| Return      | return |
+| Description | Create stack of nodes by passing over tree post order (left, right, parent). |
+| Arguments   | `root`: root of tree<br>`stack`: stack to grow with nodes |
+| Return      | 0 on success, 1 on failure |
 
 #### Helper Functions
 | | `int bitwise_log2(int num)` |
 | ---- | ---- |
-| Description | description |
-| Argument    | args |
-| Return      | return |
+| Description | Calculate floor of log base 2 of number. |
+| Argument    | `num`: number for calculation |
+| Return      | floor of log base 2 of number |
 
 | | `int zip(Node **node, int direction)` |
 | ---- | ---- |
-| Description | description |
-| Arguments   | args |
-| Return      | return |
+| Description | Perform rotation(s) on node, used by zig() and zag() |
+| Arguments   | `node`: node to rotate<br>`direction`: direction of imbalance |
+| Return      | 0 on success, 1 on failure |
 
 | | `int rebalance(Node **node)` |
 | ---- | ---- |
-| Description | description |
-| Argument    | args |
-| Return      | return |
-
-| | `int destroy_node(Node *node)` |
-| ---- | ---- |
-| Description | description |
-| Argument    | args |
-| Return      | return |
+| Description | Determine if single or double rotation is need to rebalance tree |
+| Argument    | `node`: node to be rebalanced |
+| Return      | 0 on success, 1 on failure |
