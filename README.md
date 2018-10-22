@@ -56,7 +56,7 @@ typedef struct _stack
 | | `int destroy_tree(Node *root)` |
 | ---- | ---- |
 | Description | Destroy tree, including all nodes within. |
-| Argument    | root: root node of tree |
+| Argument    | `root`: root node of tree |
 | Return      | 0 on success, 1 on failure |
 
 | | `Stack * create_stack(int node_count)` |
