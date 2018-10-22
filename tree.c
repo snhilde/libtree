@@ -197,8 +197,12 @@ zip(Node **node, int direction)
 }
 
 static int
-zig(Node **node, int direction)
+zig(Node **node)
 {
+	int direction;
+	
+	direction = !((*node)->load & 4); /* use 2's complement to determine sign of load */
+	
 	zip(node, direction);
 	
 	(*node)->load = 0;
@@ -208,8 +212,12 @@ zig(Node **node, int direction)
 }
 
 static int
-zag(Node **node, int direction)
+zag(Node **node)
 {
+	int direction;
+	
+	direction = !((*node)->load & 4); /* use 2's complement to determine sign of load */
+	
 	zip(&(*node)->child[direction], !direction);
 	zip(node, direction);
 	
