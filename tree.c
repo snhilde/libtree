@@ -40,6 +40,20 @@ bitwise_log2(int num)
 	return j;
 }
 
+static Stack *
+create_stack(int node_count)
+{
+	Stack *stack;
+	
+	stack = malloc(sizeof(Stack));
+	
+	stack->capacity = 2 * bitwise_log2(node_count);
+	stack->array = calloc(stack->capacity, sizeof(Node *));
+	stack->count = 0;
+	
+	return stack;
+}
+
 static Node *
 create_node(int value, int *count)
 {
@@ -58,68 +72,6 @@ create_node(int value, int *count)
 	return node;
 }
 
-static int
-destroy_node(int value, Node *root)
-{
-	Stack *stack;
-	Node *parent;
-	int direction;
-	Node *node; /* node to be deleted */
-	
-	stack = create_stack(*root->count);
-	parent = find_parent(value, root, stack);
-	if (parent->value == root->value)
-		return -1;
-	
-	direction = value > parent->value;
-	node = parent->child[direction];
-	
-	if (node->child[0] && node->child[1]) {
-		/* node to be deleted has two children */
-		
-		/* strategy:
-		 * 1. Remove node of interest and replace with next-smallest node.
-		 * 2. When swapping out next-smallest node, connect its child
-		 * 	  (by definition, it can only have one, and it will be to the left)
-		 * 	  to its parent.
-		 * 3. Rebalance this new connection, if necessary.
-		 * 4. Set the swap node into place and connect the children,
-		 *    completing the swap.
-		 * 5. Rebalance upwards from deletion. */
-		
-		Stack *stack2;
-		Node *node_swap; /* node to be swapped with node to be deleted */
-		Node *node_swap_parent; /* parent of node to be swapped */
-		
-		stack2 = create_stack(*root->count);
-		node_swap = find_parent(node->value, parent, stack2);
-		
-		pop(stack2); /* reverse stack by one, throw away node */
-		node_swap_parent = pop(stack2);
-		
-		node_swap_parent->child[1] = node_swap->child[0];
-		node_swap->child[0] = node->child[0];
-		node_swap->child[1] = node->child[1];
-		parent->child[direction] = node_swap;
-		
-		balance(stack2, value);
-		
-		destroy_stack(stack2);
-	} else
-		/* node to be deleted has zero or one children */
-		parent->child[direction] = node->child[0] ? node->child[0] : node->child[1];
-			
-	balance(stack, value);
-	
-	(*node->count)--;
-	free(node->data);
-	free(node);
-	
-	destroy_stack(stack);
-	
-	return 0;
-}
-
 static Node *
 create_tree(void)
 {
@@ -128,38 +80,9 @@ create_tree(void)
 	
 	count = calloc(1, sizeof(int));
 	
-	root = create_node(0, 1, count);
+	root = create_node(0, count);
 	
 	return root;
-}
-
-static int
-destroy_tree(Node *root)
-{
-	return 0;
-}
-
-static Stack *
-create_stack(int node_count)
-{
-	Stack *stack;
-	
-	stack = malloc(sizeof(Stack));
-	
-	stack->capacity = 2 * bitwise_log2(node_count);
-	stack->array = calloc(stack->capacity, sizeof(Node *));
-	stack->count = 0;
-	
-	return stack;
-}
-
-void
-destroy_stack(Stack *stack)
-{
-	free(stack->array);
-	free(stack);
-	
-	return 0;
 }
 
 static int
@@ -236,6 +159,27 @@ zag(Node **node)
 	return 0;
 }
 
+static Node *
+find_parent(int value, Node *root, Stack *stack)
+{
+	Node *parent;
+	int direction;
+	
+	parent = root;
+	direction = value > parent->value;
+	if (stack)
+		push(stack, parent);
+	
+	while (parent->child[direction] && parent->child[direction]->value != value) {
+		parent = parent->child[direction];
+		direction = value > parent->value;
+		if (stack)
+			push(stack, parent);
+	}
+	
+	return parent;
+}
+
 static int
 rebalance(Node **node)
 {
@@ -244,9 +188,9 @@ rebalance(Node **node)
 	direction = !((*node)->load & 4); /* use 2's complement to determine sign of load */
 	
 	if ((*node)->load >> 2 == (*node)->child[direction]->load >> 2)
-		zig(node, direction);
+		zig(node);
 	else
-		zag(node, direction);
+		zag(node);
 	
 	return 0;
 }
@@ -277,25 +221,79 @@ balance(Stack *stack, int value)
 	return 0;
 }
 
-static Node *
-find_parent(int value, Node *root, Stack *stack)
+void
+destroy_stack(Stack *stack)
 {
+	free(stack->array);
+	free(stack);
+}
+
+static int
+destroy_node(int value, Node *root)
+{
+	Stack *stack;
 	Node *parent;
 	int direction;
+	Node *node; /* node to be deleted */
 	
-	parent = root;
+	stack = create_stack(*root->count);
+	parent = find_parent(value, root, stack);
+	if (parent->value == root->value)
+		return -1;
+	
 	direction = value > parent->value;
-	if (stack)
-		push(stack, parent);
+	node = parent->child[direction];
 	
-	while (parent->child[direction] && parent->child[direction]->value != value) {
-		parent = parent->child[direction];
-		direction = value > parent->value;
-		if (stack)
-			push(stack, parent);
-	}
+	if (node->child[0] && node->child[1]) {
+		/* node to be deleted has two children */
+		
+		/* strategy:
+		 * 1. Remove node of interest and replace with next-smallest node.
+		 * 2. When swapping out next-smallest node, connect its child
+		 * 	  (by definition, it can only have one, and it will be to the left)
+		 * 	  to its parent.
+		 * 3. Rebalance this new connection, if necessary.
+		 * 4. Set the swap node into place and connect the children,
+		 *    completing the swap.
+		 * 5. Rebalance upwards from deletion. */
+		
+		Stack *stack2;
+		Node *node_swap; /* node to be swapped with node to be deleted */
+		Node *node_swap_parent; /* parent of node to be swapped */
+		
+		stack2 = create_stack(*root->count);
+		node_swap = find_parent(node->value, parent, stack2);
+		
+		pop(stack2); /* reverse stack by one, throw away node */
+		node_swap_parent = pop(stack2);
+		
+		node_swap_parent->child[1] = node_swap->child[0];
+		node_swap->child[0] = node->child[0];
+		node_swap->child[1] = node->child[1];
+		parent->child[direction] = node_swap;
+		
+		balance(stack2, value);
+		
+		destroy_stack(stack2);
+	} else
+		/* node to be deleted has zero or one children */
+		parent->child[direction] = node->child[0] ? node->child[0] : node->child[1];
+			
+	balance(stack, value);
 	
-	return parent;
+	(*node->count)--;
+	free(node->data);
+	free(node);
+	
+	destroy_stack(stack);
+	
+	return 0;
+}
+
+static int
+destroy_tree(Node *root)
+{
+	return 0;
 }
 
 static int
