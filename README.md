@@ -17,6 +17,18 @@ Contents:
 * [Tree Node](#tree-node)
 * [Stack](#stack)
 
+#### Tree Type
+```c
+enum tree_type
+{
+	BIN,
+	BST,
+	AVL,
+	RB,
+	HEAP,
+	SPLAY
+};
+```
 #### Tree Node
 ```c
 typedef struct _node
