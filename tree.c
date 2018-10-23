@@ -32,7 +32,7 @@ bitwise_log2(int num)
 {
 	int j;
 	
-	j = 0;
+	j = 1;
 	while (num >> 1) {
 		num >>= 1;
 		j++;

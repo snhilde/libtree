@@ -179,7 +179,7 @@ typedef struct _stack
 #### Helper Functions
 | | `int bitwise_log2(int num)` |
 | ---- | ---- |
-| Description | Calculate floor of log base 2 of number. |
+| Description | Calculate ceiling of log base 2 of number. |
 | Argument    | `num`: number for calculation |
 | Return      | floor of log base 2 of number |
 
