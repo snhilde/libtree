@@ -49,7 +49,7 @@ typedef struct _stack
 #### Object Functions
 | | `Node * create_tree(void)` |
 | ---- | ---- |
-| Description | Create new tree. Memory is allocated for one node and one integer. Must be freed with destroy_tree() |
+| Description | Create new tree. Memory is allocated for one node and one integer. Must be freed with destroy_tree(). |
 | Argument    | none |
 | Return      | pointer to root node of tree |
 
@@ -61,7 +61,7 @@ typedef struct _stack
 
 | | `Stack * create_stack(int node_count)` |
 | ---- | ---- |
-| Description | Create new stack. Memory is allocated for stack struct and number of pointers. Must be freed with destroy_stack() |
+| Description | Create new stack. Memory is allocated for stack struct and number of pointers. Must be freed with destroy_stack(). |
 | Argument    | `node_count`: number of nodes to reserve space for, usually height of tree |
 | Return      | pointer to new stack |
 
@@ -99,7 +99,7 @@ typedef struct _stack
 #### Rotation Functions
 | | `int balance(Stack *stack, int value)` |
 | ---- | ---- |
-| Description | Balance tree path following AVL rules |
+| Description | Balance tree path following AVL rules. |
 | Arguments   | `stack`: path of nodes to iteratively traverse upward toward root<br>`value`: value of latest node, used for calculating load factor |
 | Return      | 0 on success, 1 on failure |
 
@@ -131,7 +131,7 @@ typedef struct _stack
 | | `Node * peek(Stack *stack)` |
 | ---- | ---- |
 | Description | See the most recent node at the top of the stack. |
-| Argument    | `stack`: stack to examine. |
+| Argument    | `stack`: stack to examine |
 | Return      | pointer to node |
 
 | | `static int grow_stack(Stack *stack` |
