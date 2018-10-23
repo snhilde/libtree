@@ -21,11 +21,11 @@ Contents:
 ```c
 enum tree_type
 {
-	BIN,
-	BST,
-	AVL,
-	HEAP,
-	SPLAY
+	BIN,	/* binary tree, unsorted */
+	BST,	/* binary search tree */
+	AVL,	/* AVL tree */
+	HEAP,	/* heap tree */
+	SPLAY	/* splay tree */
 };
 ```
 #### Tree Node
