@@ -6,7 +6,6 @@ enum tree_type
 	BIN, 
 	BST,
 	AVL,
-	RB,
 	HEAP,
 	SPLAY
 };
@@ -18,6 +17,7 @@ typedef struct _node
 	int load;
 	int value;
 	int *count;
+	int *tree_type;
 } Node;
 
 typedef struct _stack
@@ -74,7 +74,7 @@ create_node(int value, int *count)
 }
 
 static Node *
-create_tree(void)
+create_tree(int type)
 {
 	int *count;
 	Node *root;
