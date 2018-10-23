@@ -87,8 +87,19 @@ create_tree(void)
 }
 
 static int
+grow_stack(Stack *stack)
+{
+	stack->array = realloc(stack->array, 2 * stack->capacity);
+	
+	return stack->array ? 0 : 1;
+}
+
+static int
 push(Stack *stack, Node *node)
 {
+	if (stack->count == stack->capacity)
+		grow_stack(stack);
+	
 	stack->array[stack->count++] = node;
 	
 	return 0;
