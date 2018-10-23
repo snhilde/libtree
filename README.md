@@ -134,6 +134,12 @@ typedef struct _stack
 | Argument    | `stack`: stack to examine. |
 | Return      | pointer to node |
 
+| | `static int grow_stack(Stack *stack` |
+| ---- | ---- |
+| Description | Double capacity of stack. |
+| Argument    | `stack`: stack struct of array to grow |
+| Return      | 0 on success, 1 on failure |
+
 #### Traversal Functions
 | | `int breadth_first_traversal(Node *root, Stack *stack)` |
 | ---- | ---- |
