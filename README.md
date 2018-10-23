@@ -49,7 +49,7 @@ typedef struct _stack
 #### Object Functions
 | | `Node * create_tree(void)` |
 | ---- | ---- |
-| Description | Create new tree. Memory is allocated for one node and one integer. Must be freed with destroy_tree(). |
+| Description | Create new tree. Memory is allocated for one node and one integer. Must be freed with `destroy_tree()`. |
 | Argument    | none |
 | Return      | pointer to root node of tree |
 
@@ -61,7 +61,7 @@ typedef struct _stack
 
 | | `Stack * create_stack(int node_count)` |
 | ---- | ---- |
-| Description | Create new stack. Memory is allocated for stack struct and number of pointers. Must be freed with destroy_stack(). |
+| Description | Create new stack. Memory is allocated for stack struct and number of pointers. Must be freed with `destroy_stack()`. |
 | Argument    | `node_count`: number of nodes to reserve space for, usually height of tree |
 | Return      | pointer to new stack |
 
@@ -174,7 +174,7 @@ typedef struct _stack
 
 | | `int zip(Node **node, int direction)` |
 | ---- | ---- |
-| Description | Perform rotation(s) on node, used by zig() and zag() |
+| Description | Perform rotation(s) on node, used by `zig()` and `zag()` |
 | Arguments   | `node`: node to rotate<br>`direction`: direction of imbalance |
 | Return      | 0 on success, 1 on failure |
 
