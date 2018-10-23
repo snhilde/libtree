@@ -3,6 +3,7 @@
 
 enum tree_type
 {
+	BIN, 
 	BST,
 	AVL,
 	RB,
