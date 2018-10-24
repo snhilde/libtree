@@ -56,7 +56,7 @@ create_stack(int node_count)
 }
 
 static Node *
-create_node(int value, int *count)
+create_node(int value, Node *root)
 {
 	Node *node;
 	
@@ -66,7 +66,7 @@ create_node(int value, int *count)
 	node->child[1] = NULL;
 	node->load = 0;
 	node->value = value;
-	node->count = count;
+	node->count = root->count;
 	
 	(*count)++;
 	
