@@ -83,10 +83,10 @@ typedef struct _stack
 | Return      | no return value |
 
 #### Node Functions
-| | `Node *  create_node(int value, int *count)` |
+| | `Node *  create_node(int value, Node *root)` |
 | ---- | ---- |
 | Description | Create new node. The node must be freed with `destroy()` after use. |
-| Arguments   | `value`: value of node<br>`count`: pointer to count of nodes, usually `root->count` |
+| Arguments   | `value`: value of node<br>`root`: pointer to root node of tree |
 | Return      | pointer to a new node |
 
 | | `int destroy_node(int value, Node *root)` |
