@@ -17,7 +17,7 @@ typedef struct _node
 	int load;
 	int value;
 	int *count;
-	int *tree_type;
+	int *type;
 } Node;
 
 typedef struct _stack
@@ -69,20 +69,27 @@ create_node(int value, Node *root)
 	node->count = root->count;
 	node->type = root->type;
 	
-	(*count)++;
+	(*root->count)++;
 	
 	return node;
 }
 
 static Node *
-create_tree(int type)
+create_tree(int tree_type)
 {
-	int *count;
 	Node *root;
 	
-	count = calloc(1, sizeof(int));
+	root = malloc(sizeof(Node));
+	root->data = NULL;
+	root->child[0] = NULL;
+	root->child[1] = NULL;
+	root->load = 0;
+	root->value = 0;
+	root->count = calloc(1, sizeof(int));
+	root->type = calloc(1, sizeof(int));
 	
-	root = create_node(0, count);
+	*root->count = 1;
+	*root->type = tree_type;
 	
 	return root;
 }
@@ -320,7 +327,7 @@ insert(int value, Node *root)
 	parent = find_parent(value, root, stack);
 	
 	direction = value > parent->value;
-	parent->child[direction] = create_node(value, root->count);
+	parent->child[direction] = create_node(value, root);
 	
 	balance(stack, value);
 	
