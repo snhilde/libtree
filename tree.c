@@ -67,6 +67,7 @@ create_node(int value, Node *root)
 	node->load = 0;
 	node->value = value;
 	node->count = root->count;
+	node->type = root->type;
 	
 	(*count)++;
 	
