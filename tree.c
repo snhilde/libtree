@@ -55,10 +55,10 @@ get_type(Node *node)
 {
 	int i;
 	
-	if (!*node->tree_type)
+	if (!*node->type)
 		return 0;
 	
-	for (i = 0; !(*node->tree_type & 1 << i); i++);
+	for (i = 0; !(*node->type & 1 << i); i++);
 		
 	return i;
 }
@@ -67,7 +67,7 @@ static int
 check_type(Node *node, int flag)
 {
 	if (flag)
-		return *node->tree_type & 1 << flag;
+		return *node->type & 1 << flag;
 	
 	return 0;
 }
