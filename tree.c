@@ -41,6 +41,37 @@ bitwise_log2(int num)
 	return j;
 }
 
+static int
+set_type(int flag)
+{
+	if (flag)
+		return 1 << flag;
+	
+	return 0;
+}
+
+static int
+get_type(Node *node)
+{
+	int i;
+	
+	if (!*node->tree_type)
+		return 0;
+	
+	for (i = 0; !(*node->tree_type & 1 << i); i++);
+		
+	return i;
+}
+
+static int
+check_type(Node *node, int flag)
+{
+	if (flag)
+		return *node->tree_type & 1 << flag;
+	
+	return 0;
+}
+
 static Stack *
 create_stack(int node_count)
 {
@@ -89,7 +120,7 @@ create_tree(int tree_type)
 	root->type = calloc(1, sizeof(int));
 	
 	*root->count = 1;
-	*root->type = tree_type;
+	*root->type = set_type(tree_type);
 	
 	return root;
 }
