@@ -183,6 +183,21 @@ typedef struct _stack
 | Argument    | `num`: number for calculation |
 | Return      | floor of log base 2 of number |
 
+| | `int set_type(int flag)` |
+| ---- | ---- |
+| Description | Set tree type (from enum `tree_type`) of tree. |
+| Argument    | `flag`: number from enum `tree_type` |
+
+| | `int get_type(Node *node)` |
+| ---- | ---- |
+| Description | Get tree type of tree (as per enum `tree_type`). |
+| Argument    | `node`: node to check |
+
+| | `int check_type(Node *node, int flag)` |
+| ---- | ---- |
+| Description | Check whether or not node is a certain `tree_type`. |
+| Arguments   | `node`: node to check<br>`flag`: number from enum `tree_type` |
+
 | | `int zip(Node **node, int direction)` |
 | ---- | ---- |
 | Description | Perform rotation(s) on node, used by `zig()` and `zag()` |
