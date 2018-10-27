@@ -72,11 +72,11 @@ typedef struct _stack
 
 | | `Stack * create_stack(int node_count)` |
 | ---- | ---- |
-| Description | Create new stack. Memory is allocated for stack struct and number of pointers. Must be freed with `destroy_stack()`. |
+| Description | Create new stack. Memory is allocated for stack struct and number of pointers. Must be freed with `free_stack()`. |
 | Argument    | `node_count`: number of nodes to reserve space for, usually height of tree |
 | Return      | pointer to new stack |
 
-| | `void destroy_stack(Stack *stack)` |
+| | `void free_stack(Stack *stack)` |
 | ---- | ---- |
 | Description | Destroy stack and free memory. |
 | Argument    | `stack`: stack to be destroyed |
