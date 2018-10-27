@@ -282,6 +282,14 @@ heap_up(Node *node, Stack *stack)
 static int
 splay(Node *node, Stack *stack)
 {
+	Node *parent;
+	int direction;
+	
+	while (peek(stack)) {
+		parent = pop(stack);
+		direction = node->value > parent->value;
+		zip(&parent, direction);
+	}
 	
 	return 0;
 }
