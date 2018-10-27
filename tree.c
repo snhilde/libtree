@@ -361,7 +361,18 @@ insert(int value, Node *root)
 	new_child = create_node(value, root);
 	parent->child[direction] = new_child;
 	
-	balance(stack, value);
+	switch (get_type(root)) {
+		case 1:
+		case 2:
+			balance(stack, value);
+			break;
+		case 3:
+			heap_up(new_child, stack);
+			break;
+		case 4:
+			splay(new_child, stack);
+			break;
+	}
 	
 	destroy_stack(stack);
 	return 0;
