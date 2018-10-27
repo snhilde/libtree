@@ -354,7 +354,7 @@ destroy_node_bst(int value, Node *root)
 		 * 3. Rebalance this new connection, if necessary.
 		 * 4. Set the swap node into place and connect the children,
 		 *    completing the swap.
-		 * 5. Rebalance upwards from deletion. */
+		 * 5. If AVL tree, rebalance upwards from deletion. */
 		
 		Stack *stack2;
 		Node *node_swap; /* node to be swapped with node to be deleted */
