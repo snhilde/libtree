@@ -458,18 +458,13 @@ destroy_node(int value, Node *root)
 {
 	switch (get_type(root)) {
 		case 1:
-			destroy_node_bin(value, root);
-			break;
+			return destroy_node_bin(value, root);
 		case 2:
 		case 3:
-			destroy_node_bst(value, root);
-			break;
+			return destroy_node_bst(value, root);
 		case 4:
-			destroy_node_heap(value, root);
-			break;
+			return destroy_node_heap(value, root);
 	}
-	
-	return 0;
 }
 
 static int
