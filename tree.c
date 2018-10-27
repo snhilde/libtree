@@ -153,6 +153,9 @@ pop(Stack *stack)
 static Node *
 peek(Stack *stack)
 {
+	if (stack->count < 1)
+		return NULL;
+	
 	return stack->array[stack->count - 1];
 }
 
