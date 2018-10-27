@@ -351,14 +351,15 @@ static int
 insert(int value, Node *root)
 {
 	Stack *stack;
-	Node *parent;
+	Node *parent, *new_child;
 	int direction;
 	
 	stack = create_stack(*root->count);
 	parent = find_parent(value, root, stack);
 	
 	direction = value > parent->value;
-	parent->child[direction] = create_node(value, root);
+	new_child = create_node(value, root);
+	parent->child[direction] = new_child;
 	
 	balance(stack, value);
 	
