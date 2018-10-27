@@ -272,6 +272,20 @@ balance(Stack *stack, int value)
 	return 0;
 }
 
+static int
+heap_up(Node *node, Stack *stack)
+{
+	
+	return 0;
+}
+
+static int
+splay(Node *node, Stack *stack)
+{
+	
+	return 0;
+}
+
 void
 destroy_stack(Stack *stack)
 {
