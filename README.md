@@ -213,11 +213,11 @@ typedef struct _stack
 | | `int heap_up(Node *node, Stack *stack)` |
 | ---- | ---- |
 | Description | Iteratively move new leaf up heap into proper position. |
-| Arguments    | `node`: node to move<br>`stack`: stack to iteratively traverse |
+| Arguments    | `node`: node to move<br>`stack`: path to iteratively traverse |
 | Return      | 0 on success, 1 on failure |
 
 | | `int splay(Node *node, Stack *stack)` |
 | ---- | ---- |
 | Description | Iteratively rotate node up into root position. |
-| Arguments    | `node`: node to rotate up<br>`stack`: stack to iteratively traverse |
+| Arguments    | `node`: node to rotate up<br>`stack`: path to iteratively traverse |
 | Return      | 0 on success, 1 on failure |
