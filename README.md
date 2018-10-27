@@ -97,7 +97,7 @@ typedef struct _stack
 
 | | `int insert(int value, Node *root)` |
 | ---- | ---- |
-| Description | Add node to tree as leaf in sorted order. |
+| Description | Add node to tree as leaf in sorted order.<br>Automatically balances according to tree type. |
 | Arguments   | `value`: value of node for ordering<br>`root`: root of tree |
 | Return      | 0 on success, 1 on failure |
 
