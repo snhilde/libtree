@@ -77,10 +77,10 @@ create_stack(int node_count)
 {
 	Stack *stack;
 	
-	stack = malloc(sizeof(Stack));
+	stack = malloc(sizeof *stack);
 	
 	stack->capacity = 2 * bitwise_log2(node_count);
-	stack->array = calloc(stack->capacity, sizeof(Node *));
+	stack->array = calloc(stack->capacity, sizeof *stack->array);
 	stack->count = 0;
 	
 	return stack;
@@ -91,7 +91,7 @@ create_node(int value, Node *root)
 {
 	Node *node;
 	
-	node = malloc(sizeof(Node));
+	node = malloc(sizeof *node);
 	node->data = NULL;
 	node->child[0] = NULL;
 	node->child[1] = NULL;
@@ -110,14 +110,14 @@ create_tree(int tree_type)
 {
 	Node *root;
 	
-	root = malloc(sizeof(Node));
+	root = malloc(sizeof *root);
 	root->data = NULL;
 	root->child[0] = NULL;
 	root->child[1] = NULL;
 	root->load = 0;
 	root->value = 0;
-	root->count = calloc(1, sizeof(int));
-	root->type = calloc(1, sizeof(int));
+	root->count = calloc(1, sizeof *root->count);
+	root->type = calloc(1, sizeof *root->type);
 	
 	*root->count = 1;
 	*root->type = set_type(tree_type);
