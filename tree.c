@@ -6,7 +6,6 @@ enum tree_type
 	BIN = 0, 
 	BST,
 	AVL,
-	HEAP,
 	SPLAY
 };
 
@@ -276,13 +275,6 @@ balance(Stack *stack, int value)
 }
 
 static int
-heap_up(Node *node, Stack *stack)
-{
-	
-	return 0;
-}
-
-static int
 splay(Node *node, Stack *stack)
 {
 	Node *parent;
@@ -298,37 +290,22 @@ splay(Node *node, Stack *stack)
 }
 
 void
-destroy_stack(Stack *stack)
+free_node(Node *node)
+{
+	(*node->count)--;
+	free(node->data);
+	free(node);
+}
+
+void
+free_stack(Stack *stack)
 {
 	free(stack->array);
 	free(stack);
 }
 
 static int
-destroy_node_bin(int value, Node *root)
-{
-	Node *parent;
-	int direction;
-	Node *node; /* node to be deleted */
-	
-	parent = find_parent(value, root, NULL);
-	if (parent->value == root->value)
-		return -1;
-	
-	direction = value > parent->value;
-	node = parent->child[direction];
-	
-	parent->child[direction] = node->child[node->child[0] ? 0 : 1];
-			
-	(*node->count)--;
-	free(node->data);
-	free(node);
-	
-	return 0;
-}
-
-static int
-destroy_node_bst(int value, Node *root)
+destroy_node(int value, Node *root)
 {
 	Stack *stack;
 	Node *parent;
@@ -343,7 +320,9 @@ destroy_node_bst(int value, Node *root)
 	direction = value > parent->value;
 	node = parent->child[direction];
 	
-	if (node->child[0] && node->child[1]) {
+	if (check_type(node, BIN))
+		parent->child[direction] = node->child[node->child[0] ? 0 : 1];
+	else if (node->child[0] && node->child[1]) {
 		/* node to be deleted has two children */
 		
 		/* strategy:
@@ -374,159 +353,20 @@ destroy_node_bst(int value, Node *root)
 		if (check_type(node, AVL))
 			balance(stack2, value);
 		
-		destroy_stack(stack2);
+		free_stack(stack2);
 	} else
 		/* node to be deleted has zero or one children */
 		parent->child[direction] = node->child[0] ? node->child[0] : node->child[1];
 			
 	if (check_type(node, AVL))
 		balance(stack, value);
+	else if (check_type(node, SPLAY))
+		splay(parent, stack);
 	
-	(*node->count)--;
-	free(node->data);
-	free(node);
-	
-	destroy_stack(stack);
-	
-	return 0;
-}
-
-static int
-destroy_node_heap(int value, Node *root)
-{
-	Stack *stack;
-	Node *parent;
-	int direction;
-	Node *node; /* node to be deleted */
-	
-	stack = create_stack(*root->count);
-	parent = find_parent(value, root, stack);
-	if (parent->value == root->value)
-		return -1;
-	
-	direction = value > parent->value;
-	node = parent->child[direction];
-	
-	if (node->child[0] && node->child[1]) {
-		/* node to be deleted has two children */
-		
-		/* strategy:
-		 * 1. Remove node of interest and replace with next-smallest node.
-		 * 2. When swapping out next-smallest node, connect its child
-		 * 	  (by definition, it can only have one, and it will be to the left)
-		 * 	  to its parent.
-		 * 3. Rebalance this new connection, if necessary.
-		 * 4. Set the swap node into place and connect the children,
-		 *    completing the swap.
-		 * 5. Rebalance upwards from deletion. */
-		
-		Stack *stack2;
-		Node *node_swap; /* node to be swapped with node to be deleted */
-		Node *node_swap_parent; /* parent of node to be swapped */
-		
-		stack2 = create_stack(*root->count);
-		node_swap = find_parent(node->value, parent, stack2);
-		
-		pop(stack2); /* reverse stack by one, throw away node */
-		node_swap_parent = pop(stack2);
-		
-		node_swap_parent->child[1] = node_swap->child[0];
-		node_swap->child[0] = node->child[0];
-		node_swap->child[1] = node->child[1];
-		parent->child[direction] = node_swap;
-		
-		balance(stack2, value);
-		
-		destroy_stack(stack2);
-	} else
-		/* node to be deleted has zero or one children */
-		parent->child[direction] = node->child[0] ? node->child[0] : node->child[1];
-			
-	balance(stack, value);
-	
-	(*node->count)--;
-	free(node->data);
-	free(node);
-	
-	destroy_stack(stack);
+	free_stack(stack);
+	free_node(node);
 	
 	return 0;
-}
-
-static int
-destroy_node_splay(int value, Node *root)
-{
-	Stack *stack;
-	Node *parent;
-	int direction;
-	Node *node; /* node to be deleted */
-	
-	stack = create_stack(*root->count);
-	parent = find_parent(value, root, stack);
-	if (parent->value == root->value)
-		return -1;
-	
-	direction = value > parent->value;
-	node = parent->child[direction];
-	
-	if (node->child[0] && node->child[1]) {
-		/* node to be deleted has two children */
-		
-		/* strategy:
-		 * 1. Remove node of interest and replace with next-smallest node.
-		 * 2. When swapping out next-smallest node, connect its child
-		 * 	  (by definition, it can only have one, and it will be to the left)
-		 * 	  to its parent.
-		 * 3. Rebalance this new connection, if necessary.
-		 * 4. Set the swap node into place and connect the children,
-		 *    completing the swap.
-		 * 5. Rebalance upwards from deletion. */
-		
-		Stack *stack2;
-		Node *node_swap; /* node to be swapped with node to be deleted */
-		Node *node_swap_parent; /* parent of node to be swapped */
-		
-		stack2 = create_stack(*root->count);
-		node_swap = find_parent(node->value, parent, stack2);
-		
-		pop(stack2); /* reverse stack by one, throw away node */
-		node_swap_parent = pop(stack2);
-		
-		node_swap_parent->child[1] = node_swap->child[0];
-		node_swap->child[0] = node->child[0];
-		node_swap->child[1] = node->child[1];
-		parent->child[direction] = node_swap;
-		
-		balance(stack2, value);
-		
-		destroy_stack(stack2);
-	} else
-		/* node to be deleted has zero or one children */
-		parent->child[direction] = node->child[0] ? node->child[0] : node->child[1];
-			
-	balance(stack, value);
-	
-	(*node->count)--;
-	free(node->data);
-	free(node);
-	
-	destroy_stack(stack);
-	
-	return 0;
-}
-
-static int
-destroy_node(int value, Node *root)
-{
-	switch (get_type(root)) {
-		case 1:
-			return destroy_node_bin(value, root);
-		case 2:
-		case 3:
-			return destroy_node_bst(value, root);
-		case 4:
-			return destroy_node_heap(value, root);
-	}
 }
 
 static int
@@ -555,15 +395,12 @@ insert(int value, Node *root)
 				balance(stack, value);
 				break;
 			case 3:
-				heap_up(new_child, stack);
-				break;
-			case 4:
 				splay(new_child, stack);
 				break;
 		}
 	}
 	
-	destroy_stack(stack);
+	free_stack(stack);
 	return 0;
 }
 

@@ -24,7 +24,6 @@ enum tree_type
 	BIN,		/* binary tree, unsorted */
 	BST,		/* binary search tree */
 	AVL,		/* AVL tree */
-	HEAP,		/* heap tree */
 	SPLAY		/* splay tree */
 };
 ```
@@ -208,12 +207,6 @@ typedef struct _stack
 | ---- | ---- |
 | Description | Determine if single or double rotation is need to rebalance tree |
 | Argument    | `node`: node to be rebalanced |
-| Return      | 0 on success, 1 on failure |
-
-| | `int heap_up(Node *node, Stack *stack)` |
-| ---- | ---- |
-| Description | Iteratively move new leaf up heap into proper position. |
-| Arguments    | `node`: node to move<br>`stack`: path to iteratively traverse |
 | Return      | 0 on success, 1 on failure |
 
 | | `int splay(Node *node, Stack *stack)` |
