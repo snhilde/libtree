@@ -180,7 +180,7 @@ peek(Stack *stack)
 	return stack->array[stack->count - 1];
 }
 
-static int
+void
 zip(Node **node, int direction)
 {
 	Node *node_new;
@@ -190,11 +190,9 @@ zip(Node **node, int direction)
 	node_new->child[!direction] = *node;
 	
 	*node = node_new;
-	
-	return 0;
 }
 
-static int
+void
 zig(Node **node)
 {
 	int direction;
@@ -205,11 +203,9 @@ zig(Node **node)
 	
 	(*node)->load = 0;
 	(*node)->child[!direction]->load = 0;
-	
-	return 0;
 }
 
-static int
+void
 zag(Node **node)
 {
 	int direction;
@@ -230,8 +226,6 @@ zag(Node **node)
 		(*node)->child[direction]->load = direction * -1;
 	}
 	(*node)->load = 0;
-	
-	return 0;
 }
 
 static Node *
