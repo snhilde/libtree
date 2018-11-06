@@ -59,13 +59,13 @@ typedef struct _stack
 #### Object Functions
 | | `Node * create_tree(int tree_type)` |
 | ---- | ---- |
-| Description | Create new tree. Memory is allocated for one node and one integer. Must be freed with `destroy_tree()`.<br>Note: the initial value for the root node will be 0. |
+| Description | Create new tree. Memory is allocated for one node and one integer. Must be freed with `free_tree()`.<br>Note: the initial value for the root node will be 0. |
 | Argument    | `tree_type`: type from enum `tree_type` |
 | Return      | pointer to root node of tree, or NULL on error |
 
-| | `int destroy_tree(Node *root)` |
+| | `int free_tree(Node *root)` |
 | ---- | ---- |
-| Description | Destroy tree, including all nodes within. |
+| Description | Destroy tree, freeing all nodes within. |
 | Argument    | `root`: root node of tree |
 | Return      | 0 on success, 1 on failure |
 
