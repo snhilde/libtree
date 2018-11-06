@@ -338,9 +338,8 @@ destroy_node(int value, Node *root)
 	direction = value > parent->value;
 	node = parent->child[direction];
 	
-	if (check_type(node, BIN)) {
-		parent->child[direction] = node->child[node->child[0] ? 0 : 1];
-	}
+	if (check_type(node, BIN))
+		free_tree(node);
 	else if (node->child[0] && node->child[1]) {
 		/* node to be deleted has two children */
 		
