@@ -86,7 +86,7 @@ typedef struct _stack
 | ---- | ---- |
 | Description | Create new node. The node must be freed with `destroy()` after use. |
 | Arguments   | `value`: value of node<br>`root`: pointer to root node of tree |
-| Return      | pointer to a new node |
+| Return      | pointer to a new node, or NULL on error |
 
 | | `int destroy_node(int value, Node *root)` |
 | ---- | ---- |
