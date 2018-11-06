@@ -77,9 +77,14 @@ create_stack(int node_count)
 	Stack *stack;
 	
 	stack = malloc(sizeof *stack);
+	if (!stack)
+		return NULL;
 	
 	stack->capacity = 2 * bitwise_log2(node_count);
 	stack->array = calloc(stack->capacity, sizeof *stack->array);
+	if (!stack->array)
+		return NULL;
+	
 	stack->count = 0;
 	
 	return stack;
