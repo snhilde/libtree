@@ -57,7 +57,7 @@ get_type(Node *node)
 	if (!*node->type)
 		return 0;
 	
-	for (i = 0; !(*node->type & 1 << i); i++);
+	for (i = 0; !(*node->type & (1 << i)); i++);
 		
 	return i;
 }
