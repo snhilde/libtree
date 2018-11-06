@@ -288,7 +288,7 @@ balance(Stack *stack, int value)
 	}
 }
 
-static int
+void
 splay(Node *node, Stack *stack)
 {
 	Node *parent;
@@ -299,8 +299,6 @@ splay(Node *node, Stack *stack)
 		direction = node->value > parent->value;
 		zip(&parent, direction);
 	}
-	
-	return 0;
 }
 
 void
