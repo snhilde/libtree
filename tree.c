@@ -237,14 +237,14 @@ find_parent(int value, Node *root, Stack *stack)
 	parent = root;
 	direction = value > parent->value;
 	if (stack)
-		if (!push(stack, parent))
+		if (push(stack, parent))
 			return NULL;
 	
 	while (parent->child[direction] && parent->child[direction]->value != value) {
 		parent = parent->child[direction];
 		direction = value > parent->value;
 		if (stack)
-			if (!push(stack, parent))
+			if (push(stack, parent))
 				return NULL;
 	}
 	
