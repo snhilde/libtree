@@ -209,8 +209,8 @@ typedef struct _stack
 | Argument    | `node`: node to be rebalanced |
 | Return      | no return value |
 
-| | `int splay(Node *node, Stack *stack)` |
+| | `void splay(Node *node, Stack *stack)` |
 | ---- | ---- |
 | Description | Iteratively rotate node up into root position. |
 | Arguments    | `node`: node to rotate up<br>`stack`: path to iteratively traverse |
-| Return      | 0 on success, 1 on failure |
+| Return      | no return value |
