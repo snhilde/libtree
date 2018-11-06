@@ -121,13 +121,21 @@ create_tree(int tree_type)
 	Node *root;
 	
 	root = malloc(sizeof *root);
+	if (!root)
+		return NULL;
+	
 	root->data = NULL;
 	root->child[0] = NULL;
 	root->child[1] = NULL;
 	root->load = 0;
 	root->value = 0;
 	root->count = calloc(1, sizeof *root->count);
+	if (!root->count)
+		return NULL;
+	
 	root->type = calloc(1, sizeof *root->type);
+	if (!root->type)
+		return NULL;
 	
 	*root->count = 1;
 	*root->type = set_type(tree_type);
