@@ -113,17 +113,17 @@ typedef struct _stack
 | Arguments   | `stack`: path of nodes to iteratively traverse upward toward root<br>`value`: value of latest node, used for calculating load factor |
 | Return      | 0 on success, 1 on failure |
 
-| | `int zig(Node **node)` |
+| | `void zig(Node **node)` |
 | ---- | ---- |
 | Description | Single rotation. |
 | Argument    | `node`: address of node with load factor of |2| |
-| Return      | 0 on success, 1 on failure |
+| Return      | no return value |
 
-| | `int zag(Node **node)` |
+| | `void zag(Node **node)` |
 | ---- | ---- |
 | Description | Double rotation. |
 | Argument    | `node`: address of node with load factor of |2| |
-| Return      | 0 on success, 1 on failure |
+| Return      | no return value |
 
 #### Stack Functions
 | | `int push(Stack *stack, Node *node)` |
@@ -197,11 +197,11 @@ typedef struct _stack
 | Description | Check whether or not node is a certain `tree_type`. |
 | Arguments   | `node`: node to check<br>`flag`: number from enum `tree_type` |
 
-| | `int zip(Node **node, int direction)` |
+| | `void zip(Node **node, int direction)` |
 | ---- | ---- |
 | Description | Perform rotation(s) on node, used by `zig()` and `zag()` |
 | Arguments   | `node`: node to rotate<br>`direction`: direction of imbalance |
-| Return      | 0 on success, 1 on failure |
+| Return      | no return value |
 
 | | `int rebalance(Node **node)` |
 | ---- | ---- |
