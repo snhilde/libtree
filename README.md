@@ -73,7 +73,7 @@ typedef struct _stack
 | ---- | ---- |
 | Description | Create new stack. Memory is allocated for stack struct and number of pointers. Must be freed with `free_stack()`. |
 | Argument    | `node_count`: number of nodes to reserve space for, usually height of tree |
-| Return      | pointer to new stack |
+| Return      | pointer to new stack, or NULL on error |
 
 | | `void free_stack(Stack *stack)` |
 | ---- | ---- |
