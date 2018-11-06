@@ -90,7 +90,7 @@ typedef struct _stack
 
 | | `int destroy_node(int value, Node *root)` |
 | ---- | ---- |
-| Description | Destroy node and free memory. |
+| Description | Destroy node and free memory. If tree is binary tree (type is BIN), then the node and all its subordinates are all freed. |
 | Arguments   | `value`: value of node to be found and deleted<br>`root`: root of node's tree |
 | Return      | 0 on success, 1 on failure |
 
