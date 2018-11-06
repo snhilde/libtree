@@ -66,7 +66,7 @@ static int
 check_type(Node *node, int flag)
 {
 	if (flag)
-		return *node->type & 1 << flag;
+		return *node->type & (1 << flag);
 	
 	return 0;
 }
