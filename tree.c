@@ -301,18 +301,18 @@ splay(Node *node, Stack *stack)
 	}
 }
 
-static int
-free_tree(Node *root)
-{
-	return 0;
-}
-
 void
 free_node(Node *node)
 {
 	(*node->count)--;
 	free(node->data);
 	free(node);
+}
+
+static int
+free_tree(Node *root)
+{
+	return 0;
 }
 
 void
