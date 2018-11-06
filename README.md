@@ -130,7 +130,7 @@ typedef struct _stack
 | ---- | ---- |
 | Description | Add node to stack. |
 | Arguments   | `stack`: stack to be grown<br>`node`: node to add to stack |
-| Return      | 1 on success, NULL on failure |
+| Return      | 1 on success, 0 on failure |
 
 | | `Node * pop(Stack *stack)` |
 | ---- | ---- |
