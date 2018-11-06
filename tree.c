@@ -143,12 +143,12 @@ create_tree(int tree_type)
 	return root;
 }
 
-static int
+static Stack *
 grow_stack(Stack *stack)
 {
 	stack->array = realloc(stack->array, 2 * stack->capacity);
 	
-	return stack->array ? 0 : 1;
+	return stack->array ? stack : NULL;
 }
 
 static int
