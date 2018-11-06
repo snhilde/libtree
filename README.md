@@ -104,7 +104,7 @@ typedef struct _stack
 | ---- | ---- |
 | Description | Get parent of node. |
 | Arguments   | `value`: value of node whose parent will be found<br>`root`: root of tree<br>`stack` (optional): stack to be grown during iterative search |
-| Return      | parent node of node with value `value` |
+| Return      | parent node of node with value `value`, or NULL on failure |
 
 #### Rotation Functions
 | | `int balance(Stack *stack, int value)` |
