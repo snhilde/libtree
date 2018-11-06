@@ -264,7 +264,7 @@ rebalance(Node **node)
 		zag(node);
 }
 
-static int
+void
 balance(Stack *stack, int value)
 {
 	int i;
@@ -283,11 +283,9 @@ balance(Stack *stack, int value)
 			case -2:
 				rebalance(&node);
 			case 0:
-				return 0;
+				break;
 		}
 	}
-	
-	return 0;
 }
 
 static int

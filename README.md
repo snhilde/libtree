@@ -107,11 +107,11 @@ typedef struct _stack
 | Return      | parent node of node with value `value`, or NULL on failure |
 
 #### Rotation Functions
-| | `int balance(Stack *stack, int value)` |
+| | `void balance(Stack *stack, int value)` |
 | ---- | ---- |
 | Description | Balance tree path following AVL rules. |
 | Arguments   | `stack`: path of nodes to iteratively traverse upward toward root<br>`value`: value of latest node, used for calculating load factor |
-| Return      | 0 on success, 1 on failure |
+| Return      | no return value |
 
 | | `void zig(Node **node)` |
 | ---- | ---- |
