@@ -203,11 +203,11 @@ typedef struct _stack
 | Arguments   | `node`: node to rotate<br>`direction`: direction of imbalance |
 | Return      | no return value |
 
-| | `int rebalance(Node **node)` |
+| | `void rebalance(Node **node)` |
 | ---- | ---- |
 | Description | Determine if single or double rotation is need to rebalance tree |
 | Argument    | `node`: node to be rebalanced |
-| Return      | 0 on success, 1 on failure |
+| Return      | no return value |
 
 | | `int splay(Node *node, Stack *stack)` |
 | ---- | ---- |

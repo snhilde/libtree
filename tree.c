@@ -251,7 +251,7 @@ find_parent(int value, Node *root, Stack *stack)
 	return parent;
 }
 
-static int
+void
 rebalance(Node **node)
 {
 	int direction;
@@ -262,8 +262,6 @@ rebalance(Node **node)
 		zig(node);
 	else
 		zag(node);
-	
-	return 0;
 }
 
 static int
