@@ -162,7 +162,7 @@ push(Stack *stack, Node *node)
 	
 	stack->array[stack->count++] = node;
 	
-	return 0;
+	return 1;
 }
 
 static Node *
