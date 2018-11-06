@@ -154,8 +154,11 @@ grow_stack(Stack *stack)
 static int
 push(Stack *stack, Node *node)
 {
-	if (stack->count == stack->capacity)
-		grow_stack(stack);
+	if (stack->count == stack->capacity) {
+		stack = grow_stack(stack);
+		if (!stack)
+			return NULL;
+	}
 	
 	stack->array[stack->count++] = node;
 	
