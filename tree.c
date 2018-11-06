@@ -95,7 +95,13 @@ create_node(int value, Node *root)
 {
 	Node *node;
 	
+	if (!root)
+		return NULL;
+	
 	node = malloc(sizeof *node);
+	if (!node)
+		return NULL;
+	
 	node->data = NULL;
 	node->child[0] = NULL;
 	node->child[1] = NULL;
