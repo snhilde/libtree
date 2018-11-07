@@ -136,7 +136,7 @@ typedef struct _stack
 | ---- | ---- |
 | Description | Remove most recent node from stack.<br>Note: This does not actually delete the node from memory. It decrements the head pointer. |
 | Argument    | `stack`: stack to pull from |
-| Return      | pointer to node |
+| Return      | pointer to node, or NULL on failure |
 
 | | `Node * peek(Stack *stack)` |
 | ---- | ---- |

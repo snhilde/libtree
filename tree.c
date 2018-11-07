@@ -168,6 +168,9 @@ push(Stack *stack, Node *node)
 static Node *
 pop(Stack *stack)
 {
+	if (stack->count < 1)
+		return NULL;
+	
 	return stack->array[--stack->count];
 }
 
