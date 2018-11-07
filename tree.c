@@ -331,15 +331,19 @@ destroy_node(int value, Node *root)
 	Node *node; /* node to be deleted */
 	
 	stack = create_stack(*root->count);
+	if (!stack)
+		return 1;
+	
 	parent = find_parent(value, root, stack);
-	if (parent->value == root->value)
-		return -1;
+	if (!parent || parent->value == root->value)
+		return 1;
 	
 	direction = value > parent->value;
 	node = parent->child[direction];
 	
 	if (check_type(node, BIN))
-		free_tree(node);
+		if (free_tree(node))
+			return 1;
 	else if (node->child[0] && node->child[1]) {
 		/* node to be deleted has two children */
 		
@@ -358,10 +362,17 @@ destroy_node(int value, Node *root)
 		Node *node_swap_parent; /* parent of node to be swapped */
 		
 		stack2 = create_stack(*root->count);
+		if (!stack2)
+			return 1;
+		
 		node_swap = find_parent(node->value, parent, stack2);
+		if (!node_swap)
+			return 1;
 		
 		pop(stack2); /* reverse stack by one, throw away node */
 		node_swap_parent = pop(stack2);
+		if (!node_swap_parent)
+			return 1;
 		
 		node_swap_parent->child[1] = node_swap->child[0];
 		node_swap->child[0] = node->child[0];
