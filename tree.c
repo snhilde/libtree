@@ -409,13 +409,21 @@ insert(int value, Node *root)
 	int direction;
 	
 	stack = create_stack(*root->count);
+	if (!stack)
+		return 1;
+	
 	parent = find_parent(value, root, stack);
+	if (!parent)
+		return 1;
 	
 	direction = value > parent->value;
 	new_child = create_node(value, root);
+	if (!new_child)
+		return 1;
+	
 	parent->child[direction] = new_child;
 	
-	if (*stack->array) {
+	if (stack->array) {
 		switch (get_type(root)) {
 			case 2:
 				balance(stack, value);
