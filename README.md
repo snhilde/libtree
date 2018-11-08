@@ -1,6 +1,8 @@
 # libtree
 Library for creating binary tree objects.
 
+(Written for educational purposes - not production-ready!)
+
 Contents:
 * [Data Structures](#data-structures)
 	* [Tree Node](#tree-node)
