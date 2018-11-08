@@ -292,7 +292,7 @@ rebalance(Node **node)
 		zag(node);
 }
 
-void
+static int
 balance(Stack *stack, int value)
 {
 	int i;
@@ -318,6 +318,8 @@ balance(Stack *stack, int value)
 				break;
 		}
 	}
+	
+	return 0;
 }
 
 void

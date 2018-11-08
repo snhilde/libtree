@@ -111,7 +111,7 @@ typedef struct _stack
 | ---- | ---- |
 | Description | Balance tree path following AVL rules. |
 | Arguments   | `stack`: path of nodes to iteratively traverse upward toward root<br>`value`: value of latest node, used for calculating load factor |
-| Return      | no return value |
+| Return      | 0 on success, 1 on failure |
 
 | | `void zig(Node **node)` |
 | ---- | ---- |
