@@ -239,6 +239,9 @@ find_parent(int value, Node *root, Stack *stack)
 	Node *parent;
 	int direction;
 	
+	if (value == root->value)
+		return NULL
+	
 	parent = root;
 	direction = value > parent->value;
 	if (stack)
