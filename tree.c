@@ -259,6 +259,26 @@ find_parent(int value, Node *root, Stack *stack)
 	return parent;
 }
 
+static Node *
+find_next_smallest(Node *root, Stack *stack)
+{
+	Node *node;
+	
+	node = root->child[0];
+	if (stack)
+		if (push(stack, node))
+			return NULL;
+	
+	while (node->child[1]) {
+		node = node->child[1];
+		if (stack)
+			if (push(stack, node))
+				return NULL;
+	}
+	
+	return node;
+}
+
 void
 rebalance(Node **node)
 {
@@ -367,23 +387,25 @@ destroy_node(int value, Node *root)
 		
 		Stack *stack2;
 		Node *node_swap; /* node to be swapped with node to be deleted */
-		Node *node_swap_parent; /* parent of node to be swapped */
+		Node *node_swap_parent = NULL; /* parent of node to be swapped */
 		
 		stack2 = create_stack(*root->count);
 		if (!stack2)
 			return 1;
 		
-		node_swap = find_parent(node->value, parent, stack2);
+		node_swap = find_next_smallest(node, stack2);
 		if (!node_swap)
 			return 1;
 		
 		pop(stack2); /* reverse stack by one, throw away node */
-		node_swap_parent = pop(stack2);
-		if (!node_swap_parent)
-			return 1;
+		if (stack2->count)
+			node_swap_parent = pop(stack2);
 		
-		node_swap_parent->child[1] = node_swap->child[0];
-		node_swap->child[0] = node->child[0];
+		if (node_swap_parent) {
+			node_swap_parent->child[1] = node_swap->child[0];
+			node_swap->child[0] = node->child[0];
+		}
+		
 		node_swap->child[1] = node->child[1];
 		parent->child[direction] = node_swap;
 		
