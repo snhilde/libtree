@@ -211,22 +211,24 @@ zig(Node **node)
 void
 zag(Node **node)
 {
-	int direction;
+	int direction, d_load;
 	
 	direction = !((*node)->load & 4); /* use 2's complement to determine sign of load */
 	
 	zip(&(*node)->child[direction], !direction);
 	zip(node, direction);
 	
-	if (!direction)
-		direction = -1;
+	if (direction)
+		d_load = 1;
+	else
+		d_load = -1;
 	
-	if (direction == (*node)->load) {
-		(*node)->child[!direction]->load = direction * -1;
+	if (d_load == (*node)->load) {
 		(*node)->child[direction]->load = 0;
+		(*node)->child[!direction]->load = d_load * -1;
 	} else {
+		(*node)->child[direction]->load = d_load * -1;
 		(*node)->child[!direction]->load = 0;
-		(*node)->child[direction]->load = direction * -1;
 	}
 	(*node)->load = 0;
 }
