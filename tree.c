@@ -296,7 +296,7 @@ void
 balance(Stack *stack, int value)
 {
 	int i;
-	Node *node;
+	Node *node, *parent;
 	
 	for (i = stack->count; i; i--) {
 		node = pop(stack);
@@ -309,7 +309,11 @@ balance(Stack *stack, int value)
 		switch (node->load) {
 			case 2:
 			case -2:
-				rebalance(&node);
+				if (stack->count > 1) {
+					parent = find_parent(node->value, stack->array[0], NULL);
+					rebalance(&(parent->child[node->value > parent->value]));
+				} else
+					return 1;
 			case 0:
 				break;
 		}
