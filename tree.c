@@ -240,7 +240,7 @@ find_parent(int value, Node *root, Stack *stack)
 	int direction;
 	
 	if (value == root->value)
-		return NULL
+		return NULL;
 	
 	parent = root;
 	direction = value > parent->value;
